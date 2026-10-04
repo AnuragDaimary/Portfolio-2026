@@ -98,25 +98,33 @@ export function Header() {
         </nav>
       </div>
 
-      {open && (
-        <div id="mobile-menu" className={styles.sheet}>
-          <ul className="container">
-            {site.nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={() => setOpen(false)}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            {/* The header bar drops its Résumé button on very narrow phones. */}
-            <li className={styles.sheetResume}>
-              <a href={site.resumeHref} download onClick={() => setOpen(false)}>
-                Résumé <span aria-hidden="true">↓</span>
-              </a>
+      {/* Always mounted so it can animate closed as well as open. When closed it is
+          visibility:hidden, which also removes its links from the tab order and a11y tree. */}
+      <div id="mobile-menu" className={styles.sheet} data-open={open ? "" : undefined}>
+        <ul className="container">
+          {site.nav.map((item, i) => (
+            <li key={item.href} className={styles.sheetItem} style={order(i)}>
+              <Link href={item.href} onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+                {item.label}
+              </Link>
             </li>
-          </ul>
-        </div>
-      )}
+          ))}
+          {/* The header bar drops its Résumé button on narrow phones. */}
+          <li
+            className={`${styles.sheetItem} ${styles.sheetResume}`}
+            style={order(site.nav.length)}
+          >
+            <a
+              href={site.resumeHref}
+              download
+              onClick={() => setOpen(false)}
+              tabIndex={open ? 0 : -1}
+            >
+              Résumé <span aria-hidden="true">↓</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }
