@@ -1,0 +1,187 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-block: var(--section-y);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.labelShort { display: inline; }
+.labelFull { display: none; }
+
+/* Mobile frame shows just the eyebrow; heading stays for screen readers. */
+.title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.role + .role {
+  margin-top: 24px;
+}
+
+.dates {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.roleText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.roleTitle {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.roleBody {
+  display: none;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.skillsLabel {
+  margin-bottom: 12px;
+}
+
+.skillGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Mobile flattens the four groups into a single chip cloud. */
+.group,
+.chips {
+  display: contents;
+}
+
+.groupLabel {
+  display: none;
+}
+
+.skillGroups {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+}
+
+@media (min-width: 700px) {
+  .inner {
+    gap: 56px;
+  }
+
+  .labelShort { display: none; }
+  .labelFull { display: inline; }
+
+  .title {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    font-size: clamp(36px, 2.8vw + 16px, 56px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .columns {
+    gap: 48px 20px;
+  }
+
+  .role {
+    flex-direction: row;
+    gap: 20px;
+    padding-block: 24px;
+  }
+
+  .role + .role {
+    margin-top: 0;
+  }
+
+  .dates {
+    flex: none;
+    width: clamp(110px, 21%, 150px);
+    font-size: 12px;
+  }
+
+  .roleTitle {
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .roleBody {
+    display: block;
+  }
+
+  .skillsLabel {
+    display: none;
+  }
+
+  .skillGroups {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 32px;
+  }
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .groupLabel {
+    display: block;
+    font-weight: 400;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .columns {
+    flex-direction: row;
+  }
+
+  .roles {
+    flex: 705 1 0;
+    min-width: 0;
+  }
+
+  .skills {
+    flex: 475 1 0;
+    min-width: 0;
+  }
+}

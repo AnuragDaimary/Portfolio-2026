@@ -1,0 +1,292 @@
+/* ------------------------------------------------------------------ tokens --
+   Names mirror the Figma variables (accent/signal → --accent, etc.).
+   Light is the default; dark applies via [data-theme="dark"], which the inline
+   script in layout.tsx sets before first paint. The media query is the
+   no-JS fallback only. */
+:root {
+  --canvas: #f4f3ef;
+  --surface: #eae8e2;
+  --border: #d6d4cc;
+  --text: #111110;
+  --text-muted: #6b6a64;
+  --inverse-bg: #111110;
+  --inverse-text: #f4f3ef;
+  /* Muted text on the inverse (footer / next-project) surface. Slightly lifted
+     from the Figma value so it clears 4.5:1 against the surface. */
+  --inverse-muted: #8d8c85;
+  --accent: #ff4f00;
+  color-scheme: light;
+
+  --gutter: clamp(20px, 9.52vw - 17px, 120px);
+  --section-y: clamp(56px, 6.1vw + 32px, 120px);
+  --header-h: 87px;
+  --maxw: 1440px;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:root[data-theme="dark"] {
+  --canvas: #0e0e0d;
+  --surface: #1a1a18;
+  --border: #2c2c29;
+  --text: #f4f3ef;
+  --text-muted: #9b9a93;
+  --inverse-bg: #f4f3ef;
+  --inverse-text: #111110;
+  --inverse-muted: #6b6a64;
+  --accent: #ff6a26;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --canvas: #0e0e0d;
+    --surface: #1a1a18;
+    --border: #2c2c29;
+    --text: #f4f3ef;
+    --text-muted: #9b9a93;
+    --inverse-bg: #f4f3ef;
+    --inverse-text: #111110;
+    --inverse-muted: #6b6a64;
+    --accent: #ff6a26;
+    color-scheme: dark;
+  }
+}
+
+@media (max-width: 859px) {
+  :root {
+    --header-h: 65px;
+  }
+}
+
+/* -------------------------------------------------------------------- base -- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+section[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* -------------------------------------------------------------- primitives -- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Mono uppercase label used for every section eyebrow. */
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (max-width: 699px) {
+  .eyebrow {
+    font-size: 11px;
+  }
+}
+
+/* The Figma 4-column grid: 285px columns with 20px gutters inside 1200px. */
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 20px;
+}
+
+/* Italic serif accent words in headlines. */
+.serif {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--inverse-bg);
+  color: var(--inverse-text);
+  font-size: 14px;
+  transform: translateY(-200%);
+}
+
+.skip:focus {
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ buttons -- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease), background-color 0.25s ease,
+    color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn .arrow {
+  display: inline-block;
+  transition: transform 0.25s var(--ease);
+}
+
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+.btnPrimary {
+  padding: 16px 24px;
+  font-size: 15px;
+  background: var(--accent);
+  color: var(--inverse-text);
+}
+
+.btnPrimary:hover {
+  filter: brightness(1.08);
+}
+
+.btnSecondary {
+  padding: 15px 24px;
+  font-size: 15px;
+  border: 1px solid var(--text);
+}
+
+.btnSecondary:hover {
+  background: var(--text);
+  color: var(--canvas);
+}
+
+.btnSmall {
+  padding: 10px 18px;
+  font-size: 14px;
+  background: var(--inverse-bg);
+  color: var(--inverse-text);
+}
+
+.btnSmall:hover {
+  opacity: 0.85;
+}
+
+/* -------------------------------------------------------------------- chips -- */
+.chip {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 14px;
+  line-height: normal;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.chip:hover {
+  border-color: var(--text);
+}
+
+@media (max-width: 699px) {
+  .chip {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+}

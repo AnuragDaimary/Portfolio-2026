@@ -1,0 +1,244 @@
+.work {
+  border-top: 1px solid var(--border);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding-block: var(--section-y);
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Mobile frame shows only the eyebrow; keep the heading for screen readers. */
+.title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.blurb {
+  display: none;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.frame {
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.media {
+  transition: transform 0.7s var(--ease);
+}
+
+.card:hover .media {
+  transform: scale(1.025);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.metaText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.go {
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--accent);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.25s ease, transform 0.3s var(--ease);
+}
+
+.card:hover .go,
+.card:focus-visible .go {
+  opacity: 1;
+  transform: none;
+}
+
+.tagline {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.tags {
+  flex: none;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------- more work -- */
+.more {
+  border-bottom: 1px solid var(--border);
+}
+
+.moreLabel {
+  display: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-block: 18px;
+  border-top: 1px solid var(--border);
+  transition: padding-left 0.35s var(--ease);
+}
+
+.rowTitle {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.rowBody,
+.rowCount {
+  display: none;
+}
+
+.rowArrow {
+  font-size: 18px;
+  font-weight: 500;
+  transition: transform 0.3s var(--ease), color 0.2s ease;
+}
+
+.row:hover .rowArrow {
+  transform: translate(2px, -2px);
+  color: var(--accent);
+}
+
+@media (min-width: 700px) {
+  .inner {
+    gap: 56px;
+  }
+
+  .titleBlock .eyebrow {
+    font-size: 12px;
+  }
+
+  .title {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    font-size: clamp(36px, 2.8vw + 16px, 56px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .blurb {
+    display: block;
+    flex: none;
+    width: min(380px, 40%);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px 20px;
+  }
+
+  .wide {
+    grid-column: 1 / -1;
+  }
+
+  .card {
+    gap: 20px;
+  }
+
+  .cardTitle {
+    font-size: 24px;
+    letter-spacing: -0.015em;
+  }
+
+  .tagline {
+    font-size: 15px;
+  }
+
+  .moreLabel {
+    display: block;
+    padding-bottom: 16px;
+  }
+
+  .row {
+    gap: 20px;
+    padding-block: 28px;
+  }
+
+  .rowTitle {
+    flex: none;
+    width: clamp(220px, 33%, 400px);
+    font-size: clamp(22px, 1.4vw + 12px, 32px);
+    letter-spacing: -0.02em;
+  }
+
+  .rowBody {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .rowCount {
+    display: block;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .rowArrow {
+    font-size: 24px;
+  }
+
+  .row:hover {
+    padding-left: 12px;
+  }
+}

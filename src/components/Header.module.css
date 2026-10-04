@@ -1,0 +1,172 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: var(--header-h);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); }
+  50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.links {
+  display: flex;
+  gap: 40px;
+}
+
+.link {
+  position: relative;
+  font-size: 15px;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuButton {
+  display: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back {
+  width: 175px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.back:hover span {
+  display: inline-block;
+  transform: translateX(-3px);
+}
+
+/* Mobile sheet under the header. */
+.sheet {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--border);
+  padding-block: 8px 16px;
+}
+
+.sheet li + li {
+  border-top: 1px solid var(--border);
+}
+
+.sheet a {
+  display: block;
+  padding: 16px 0;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+@media (min-width: 860px) {
+  .sheet {
+    display: none;
+  }
+}
+
+@media (max-width: 859px) {
+  .links {
+    display: none;
+  }
+
+  .nav {
+    gap: 0;
+  }
+
+  .actions {
+    gap: 10px;
+  }
+
+  .menuButton {
+    display: block;
+  }
+
+  .resume {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .wordmark {
+    gap: 8px;
+    font-size: 15px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .caseBar {
+    gap: 12px;
+  }
+
+  .back {
+    width: auto;
+    font-size: 13px;
+  }
+}
+
+/* Case header on narrow screens: wordmark would collide with the back link. */
+@media (max-width: 599px) {
+  .caseBar .wordmark {
+    display: none;
+  }
+}

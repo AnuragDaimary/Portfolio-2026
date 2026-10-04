@@ -1,0 +1,63 @@
+import Link from "next/link";
+
+import { work } from "@/content/home";
+import { projects } from "@/content/work";
+
+import { Media } from "../Media";
+import styles from "./SelectedWork.module.css";
+
+export function SelectedWork() {
+  return (
+    <section id="work" className={styles.work} aria-labelledby="work-title">
+      <div className={`container ${styles.inner}`}>
+        <div className={styles.head}>
+          <div className={styles.titleBlock}>
+            <p className="eyebrow">{work.label}</p>
+            <h2 id="work-title" className={styles.title}>
+              {work.title}
+            </h2>
+          </div>
+          <p className={styles.blurb}>{work.blurb}</p>
+        </div>
+
+        <div className={styles.cards}>
+          {projects.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/work/${p.slug}`}
+              className={`${styles.card} ${p.span === 1 ? styles.wide : ""}`}
+            >
+              <div className={styles.frame}>
+                <Media caption={p.card.caption} height={p.card.height} className={styles.media} />
+              </div>
+              <div className={styles.meta}>
+                <div className={styles.metaText}>
+                  <h3 className={styles.cardTitle}>
+                    {p.title}
+                    <span className={styles.go} aria-hidden="true">↗</span>
+                  </h3>
+                  <p className={styles.tagline}>{p.tagline}</p>
+                </div>
+                <p className={`eyebrow ${styles.tags}`}>{p.tags}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className={styles.more}>
+          <p className={`eyebrow ${styles.moreLabel}`}>More work</p>
+          <ul>
+            {work.more.map((row) => (
+              <li key={row.title} className={styles.row}>
+                <h3 className={styles.rowTitle}>{row.title}</h3>
+                <p className={styles.rowBody}>{row.body}</p>
+                <span className={styles.rowCount}>{row.count}</span>
+                <span className={styles.rowArrow} aria-hidden="true">↗</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}

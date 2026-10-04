@@ -1,0 +1,54 @@
+/* 60×32 pill with a 26px knob, per the Figma "Theme Toggle" component. */
+.toggle {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 60px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--inverse-bg);
+  transition: transform 0.35s var(--ease);
+}
+
+:global(:root[data-theme="dark"]) .knob {
+  transform: translateX(28px);
+}
+
+.icon {
+  position: absolute;
+  top: 2px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.sun {
+  left: 2px;
+  color: var(--inverse-text);
+}
+
+.moon {
+  left: 30px;
+}
+
+:global(:root[data-theme="dark"]) .sun {
+  color: var(--text-muted);
+}
+
+:global(:root[data-theme="dark"]) .moon {
+  color: var(--inverse-text);
+}

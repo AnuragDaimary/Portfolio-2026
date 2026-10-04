@@ -1,0 +1,82 @@
+// Portfolio 2026 — data model
+// Provider is isolated here: swapping Postgres for MySQL/SQLite is a change to
+// `provider` plus a fresh migration, not a change to application code.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Prisma 7: connection URLs live in prisma.config.ts (for migrations) and in
+// the driver adapter (for runtime) — not here.
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------- contact --
+
+enum SubmissionStatus {
+  PENDING // stored, email not yet sent
+  SENT    // delivered to the inbox
+  FAILED  // stored, delivery failed — safe to retry
+  SPAM    // caught by honeypot or heuristics
+}
+
+model ContactSubmission {
+  id      String  @id @default(cuid())
+  name    String
+  email   String
+  subject String?
+  message String
+
+  status       SubmissionStatus @default(PENDING)
+  failureCount Int              @default(0)
+
+  // Never store a raw IP — only a salted hash, for rate limiting and abuse review.
+  ipHash    String?
+  userAgent String?
+  referrer  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([email])
+}
+
+// -------------------------------------------------------------- analytics --
+
+/// Running counter per page/project slug. Incremented atomically.
+model PageView {
+  slug      String   @id
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+/// Individual view events, kept for time-series questions ("views this month").
+/// Prune with scripts/prune-events.ts if this ever gets large.
+model PageViewEvent {
+  id   String @id @default(cuid())
+  slug String
+
+  visitorHash String? // salted hash — used to de-dupe, not to identify
+  referrer    String?
+  country     String?
+
+  createdAt DateTime @default(now())
+
+  @@index([slug, createdAt])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------- rate limit --
+
+/// Database-backed fixed-window rate limiting. Works on serverless, where
+/// in-memory counters reset on every cold start.
+model RateLimit {
+  key       String   @id // e.g. "contact:<ipHash>"
+  count     Int      @default(0)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
