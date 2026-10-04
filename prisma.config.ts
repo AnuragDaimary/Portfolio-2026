@@ -16,12 +16,20 @@ try {
  * *direct*, unpooled connection, because migrations cannot run through a
  * transaction pooler.
  */
+// `prisma generate` only reads the schema and never connects, so it must not demand a
+// database URL: `npm run build` runs it, and a fresh deploy (Vercel/CI) may have no database
+// variables at all while the site itself is static. Every command that does connect
+// (migrate, studio, db push) still requires DIRECT_URL and fails loudly if it is missing.
+const isGenerate = process.argv.includes("generate");
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: env("DIRECT_URL"),
+    url: isGenerate
+      ? (process.env.DIRECT_URL ?? "postgresql://unused:unused@localhost:5432/unused")
+      : env("DIRECT_URL"),
   },
 });
