@@ -199,8 +199,10 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         const url = new URL(a.href, location.href);
         if (!url.hash || url.origin !== location.origin || url.pathname !== location.pathname) return;
         if (scrollToHash(url.hash, true)) {
+          // preventDefault is enough to stop Next's <Link> from also scrolling/navigating (it
+          // bails out on defaultPrevented). Do NOT stopPropagation: the click must still reach
+          // the link's own onClick, e.g. the mobile menu closing itself.
           e.preventDefault();
-          e.stopPropagation(); // keep Next's <Link> from also scrolling
           history.pushState(null, "", url.hash === "#top" ? location.pathname : url.hash);
         }
       };
