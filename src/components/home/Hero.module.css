@@ -1,136 +1,103 @@
 .hero {
   position: relative;
-  overflow: hidden;
-}
-
-.grid {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  /* Fade the grid out toward the bottom so it never fights the lead copy. */
-  mask-image: linear-gradient(to bottom, #000 35%, transparent 90%);
 }
 
 .inner {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding-block: 48px 56px;
+  gap: clamp(4rem, 12vw, 9rem);
+  padding-block: 3rem 4rem;
 }
 
 .meta {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .metaRight {
   display: none;
 }
 
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2vw, 2rem);
+}
+
+/* The two headline lines: larger, black, medium weight. */
 .title {
-  font-size: clamp(48px, 6.1vw + 24px, 112px);
-  font-weight: 500;
-  line-height: 0.93;
-  letter-spacing: -0.045em;
+  font-size: clamp(2rem, 3.4vw + 0.9rem, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: var(--text);
   text-wrap: balance;
 }
 
-/* Serif words: italic → straightens and warms up on hover. */
-.word {
-  display: inline-block;
-  transform-origin: 50% 85%;
-  transition: transform 0.55s var(--ease), color 0.3s ease;
-  cursor: default;
+.line {
+  display: block;
 }
 
-.word:hover {
-  transform: skewX(11deg);
-  color: var(--accent);
-}
-
-.accent {
-  color: var(--accent);
-}
-
-.accent:hover {
-  color: var(--text);
-}
-
-.bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.lead {
-  max-width: 560px;
-  font-size: 16px;
-  line-height: 1.5;
+/* The sub-line: smaller and grey; only the linked employer stands out. */
+.sub {
+  max-width: 52rem;
+  font-size: clamp(1.0625rem, 0.5vw + 0.95rem, 1.375rem);
+  line-height: 1.45;
+  letter-spacing: 0;
   color: var(--text-muted);
+  text-wrap: pretty;
 }
 
-.ctas {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.employer {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.25s ease;
 }
 
-/* The mobile frame shows only the primary CTA; contact is in the nav + footer. */
-.secondary {
-  display: none;
+.employer:hover {
+  text-decoration-color: currentColor;
 }
 
 @media (min-width: 700px) {
   .inner {
-    gap: 48px;
-    padding-block: clamp(48px, 9vw - 12px, 96px);
+    padding-block: clamp(3rem, 6vw, 5.5rem) clamp(4rem, 8vw, 7.5rem);
   }
 
   .metaRight {
     display: inline;
   }
-
-  .lead {
-    font-size: 20px;
-    line-height: 1.45;
-  }
-
-  .ctas {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .secondary {
-    display: inline-flex;
-  }
 }
 
-@media (min-width: 960px) {
-  .bottom {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 48px;
-  }
-
-  .line {
-    display: block;
-  }
+/* Entrance. html.intro lasts until the loader is fully gone; that moment starts the nav and
+   header line (timeline in SmoothScroll.tsx). The hero joins 350ms in: small line, each
+   headline line, then the sub-line. Hidden until then, with no animation, so there is no
+   flash when the loader clears. */
+:global(html.intro) .meta,
+:global(html.intro) .line,
+:global(html.intro) .sub {
+  opacity: 0;
 }
 
-/* Load-in: headline lines rise one after another. */
 @media (prefers-reduced-motion: no-preference) {
-  .line {
-    animation: rise 0.9s var(--ease) both;
+  :global(html:not(.intro)) .meta,
+  :global(html:not(.intro)) .line,
+  :global(html:not(.intro)) .sub {
+    animation: rise 1s var(--ease) both;
   }
-  .line:nth-child(2) { animation-delay: 0.08s; }
-  .line:nth-child(3) { animation-delay: 0.16s; }
+
+  :global(html:not(.intro)) .meta { animation-delay: 0.35s; }
+  :global(html:not(.intro)) .line:nth-child(1) { animation-delay: 0.45s; }
+  :global(html:not(.intro)) .line:nth-child(2) { animation-delay: 0.53s; }
+  :global(html:not(.intro)) .line:nth-child(3) { animation-delay: 0.61s; }
+  :global(html:not(.intro)) .sub { animation-delay: 0.72s; }
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(0.25em); }
+  from { opacity: 0; transform: translateY(0.6em); }
   to { opacity: 1; transform: none; }
 }

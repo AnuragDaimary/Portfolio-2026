@@ -13,14 +13,16 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
     <>
       <section className={styles.title} aria-labelledby="case-title">
         <div className={`container ${styles.titleInner}`}>
-          <p className="eyebrow">{c?.eyebrow ?? "Case study — Samsung Canada"}</p>
-          <h1 id="case-title" className={styles.h1}>
+          <p className="eyebrow" data-reveal>
+            {c?.eyebrow ?? "Case study — Samsung Canada"}
+          </p>
+          <h1 id="case-title" className={styles.h1} data-reveal>
             {project.title}
           </h1>
-          <p className={styles.summary}>{c?.summary ?? project.tagline}</p>
+          <p className={styles.summary} data-reveal>{c?.summary ?? project.tagline}</p>
 
           {c ? (
-            <dl className={styles.facts}>
+            <dl className={styles.facts} data-rule="top" data-reveal>
               {c.facts.map((f) => (
                 <div key={f.label} className={styles.fact}>
                   <dt className="eyebrow">{f.label}</dt>
@@ -29,12 +31,12 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
               ))}
             </dl>
           ) : (
-            <p className={`eyebrow ${styles.soon}`}>Full case study coming soon</p>
+            <p className={`eyebrow ${styles.soon}`} data-rule="top" data-reveal>Full case study coming soon</p>
           )}
         </div>
       </section>
 
-      <div className="container">
+      <div className="container" data-reveal>
         <Media
           caption={c?.hero.caption ?? project.card.caption}
           height={c?.hero.height ?? 720}
@@ -44,7 +46,7 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
       {c?.sections.map((s) => (
         <section key={s.number} className={styles.block} aria-labelledby={`case-${s.number}`}>
           <div className={`container ${styles.blockInner}`}>
-            <div className={`grid4 ${styles.blockHead}`}>
+            <div className={`grid4 ${styles.blockHead}`} data-reveal>
               <div className={styles.labelCol}>
                 <span className={styles.num}>{s.number}</span>
                 <h2 id={`case-${s.number}`} className={styles.blockTitle}>
@@ -58,7 +60,9 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
               style={{ "--cols": s.media.length } as CSSProperties}
             >
               {s.media.map((m, i) => (
-                <Media key={i} caption={m.caption} height={m.height} />
+                <div key={i} data-reveal>
+                  <Media caption={m.caption} height={m.height} />
+                </div>
               ))}
             </div>
           </div>
@@ -68,24 +72,28 @@ export function CaseStudy({ project, next }: { project: Project; next: Project }
       {c && (
         <section className={styles.outcome} aria-labelledby="case-outcome">
           <div className={`container ${styles.outcomeInner}`}>
-            <h2 id="case-outcome" className="eyebrow">
+            <h2 id="case-outcome" className="eyebrow" data-reveal>
               04 — Outcome
             </h2>
             <ul className={styles.stats}>
               {c.outcome.stats.map((s) => (
-                <li key={s.label} className={styles.stat}>
+                <li key={s.label} className={styles.stat} data-rule="top" data-reveal>
                   <span className={styles.statValue}>{s.value}</span>
                   <span className={styles.statLabel}>{s.label}</span>
                 </li>
               ))}
             </ul>
-            {c.outcome.note && <p className={styles.note}>✦ {c.outcome.note}</p>}
+            {c.outcome.note && (
+              <p className={styles.note} data-reveal>
+                ✦ {c.outcome.note}
+              </p>
+            )}
           </div>
         </section>
       )}
 
       <Link href={`/work/${next.slug}`} className={styles.next}>
-        <div className={`container ${styles.nextInner}`}>
+        <div className={`container ${styles.nextInner}`} data-reveal>
           <p className={`eyebrow ${styles.nextLabel}`}>Next case study</p>
           <p className={styles.nextRow}>
             <span className={styles.nextTitle}>{next.title}</span>

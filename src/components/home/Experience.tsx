@@ -6,7 +6,7 @@ export function Experience() {
   return (
     <section id="experience" className={styles.section} aria-labelledby="exp-title">
       <div className={`container ${styles.inner}`}>
-        <div className={styles.head}>
+        <div className={styles.head} data-reveal>
           <p className="eyebrow">
             <span className={styles.labelFull}>{experience.label}</span>
             <span className={styles.labelShort}>{experience.labelShort}</span>
@@ -19,7 +19,7 @@ export function Experience() {
         <div className={styles.columns}>
           <ol className={styles.roles}>
             {experience.roles.map((r) => (
-              <li key={r.title} className={styles.role}>
+              <li key={r.title} className={styles.role} data-rule="top" data-reveal>
                 <p className={styles.dates}>{r.dates}</p>
                 <div className={styles.roleText}>
                   <h3 className={styles.roleTitle}>{r.title}</h3>
@@ -29,7 +29,7 @@ export function Experience() {
             ))}
           </ol>
 
-          <div className={styles.skills}>
+          <div className={styles.skills} data-reveal>
             <p className={`eyebrow ${styles.skillsLabel}`}>Skills</p>
             <div className={styles.skillGroups}>
               {experience.skills.map((g) => (

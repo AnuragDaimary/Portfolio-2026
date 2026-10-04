@@ -1,0 +1,37 @@
+/* Full-screen loader. Hidden unless html.loading is set (pre-paint script). */
+.loader {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  place-items: center;
+  background: var(--canvas);
+  color: var(--text); /* black in light mode, white in dark — the SVG uses currentColor */
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.8s;
+}
+
+:global(html.loading) .loader {
+  display: grid;
+}
+
+/* The loader stays rendered while it fades after html.loading is removed. */
+.loader[data-leaving] {
+  display: grid;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.svg {
+  width: min(45vmin, 14rem);
+  height: auto;
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.loader[data-leaving] .svg {
+  transform: scale(1.06);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}

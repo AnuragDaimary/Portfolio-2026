@@ -1,8 +1,7 @@
 /* ------------------------------------------------------------------ tokens --
    Names mirror the Figma variables (accent/signal → --accent, etc.).
    Light is the default; dark applies via [data-theme="dark"], which the inline
-   script in layout.tsx sets before first paint. The media query is the
-   no-JS fallback only. */
+   script in layout.tsx sets before first paint when the visitor has chosen it. */
 :root {
   --canvas: #f4f3ef;
   --surface: #eae8e2;
@@ -17,12 +16,16 @@
   --accent: #ff4f00;
   color-scheme: light;
 
-  --gutter: clamp(20px, 9.52vw - 17px, 120px);
-  --section-y: clamp(56px, 6.1vw + 32px, 120px);
-  --header-h: 87px;
+  --gutter: clamp(1.25rem, 9.52vw - 1.0625rem, 7.5rem);
+  --section-y: clamp(3.5rem, 6.1vw + 2rem, 7.5rem);
+  --header-h: 5.4375rem;
   --maxw: 1440px;
 
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Helvetica Neue is system-installed on Apple devices and not bundled (it is a
+     commercial font); Helvetica / Arial cover everything else. */
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 :root[data-theme="dark"] {
@@ -38,24 +41,9 @@
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --canvas: #0e0e0d;
-    --surface: #1a1a18;
-    --border: #2c2c29;
-    --text: #f4f3ef;
-    --text-muted: #9b9a93;
-    --inverse-bg: #f4f3ef;
-    --inverse-text: #111110;
-    --inverse-muted: #6b6a64;
-    --accent: #ff6a26;
-    color-scheme: dark;
-  }
-}
-
 @media (max-width: 859px) {
   :root {
-    --header-h: 65px;
+    --header-h: 4.0625rem;
   }
 }
 
@@ -67,18 +55,26 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Overall scale. Every size in the stylesheets is in rem, so this one value zooms
+   the whole site in or out. The Figma is drawn at 100%, which reads large on
+   laptop-size screens; desktop-width screens get a zoomed-out 90%. Phones and
+   tablets stay at 100%. Tune the percentage to taste (e.g. 85%, 92%). */
+@media (min-width: 1000px) {
+  html {
+    font-size: 90%;
+  }
 }
 
 body {
   margin: 0;
   background: var(--canvas);
   color: var(--text);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -114,9 +110,9 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
+  outline: 0.125rem solid var(--accent);
+  outline-offset: 0.1875rem;
+  border-radius: 0.125rem;
 }
 
 ::selection {
@@ -128,10 +124,71 @@ section[id] {
   scroll-margin-top: var(--header-h);
 }
 
+/* Native cursor is hidden only once the circle cursor has appeared (Cursor.tsx adds this). */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+/* Page is locked while the loader is up. */
+html.loading,
+html.loading body {
+  overflow: hidden;
+}
+
+/* Reserves the fixed header's height. */
+.header-spacer {
+  height: var(--header-h);
+}
+
+/* ---------------------------------------------------------- hairline rules --
+   Section dividers are drawn with a pseudo-element, not a border, so they can
+   scale in from the left. data-rule="top|bottom [load]". The hidden state only
+   applies when html.rules is set (inline script, JS + motion allowed), so
+   no-JS and reduced-motion visitors just see the lines. SmoothScroll adds
+   data-drawn when each line reaches 80% of the viewport. */
+:where([data-rule]) {
+  position: relative;
+}
+
+[data-rule]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  background: var(--rule-color, var(--border));
+  transform-origin: left center;
+  /* --rule-delay staggers lines that start in the same moment (see SmoothScroll). */
+  transition: transform 2s cubic-bezier(0.22, 1, 0.36, 1) var(--rule-delay, 0ms),
+    background-color 0.3s ease;
+  pointer-events: none;
+}
+
+[data-rule~="top"]::after {
+  top: 0;
+}
+
+[data-rule~="bottom"]::after {
+  bottom: 0;
+}
+
+html.rules [data-rule]:not([data-drawn])::after {
+  transform: scaleX(0);
+}
+
+/* ---------------------------------------------------------- content reveal --
+   [data-reveal] blocks start hidden (only when html.rules is set) and are faded up by
+   GSAP when they reach the same trigger point as the rules (see SmoothScroll). Blocks
+   that carry a rule fade only, so the line doesn't drift while it draws. */
+html.rules [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+}
+
+html.rules [data-reveal]:not([data-revealed]):not([data-rule]) {
+  transform: translateY(1.5rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
@@ -152,7 +209,7 @@ section[id] {
 /* Mono uppercase label used for every section eyebrow. */
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: normal;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -161,15 +218,15 @@ section[id] {
 
 @media (max-width: 699px) {
   .eyebrow {
-    font-size: 11px;
+    font-size: 0.6875rem;
   }
 }
 
-/* The Figma 4-column grid: 285px columns with 20px gutters inside 1200px. */
+/* The Figma 4-column grid: 285px columns with 20px gutters inside 1200px (at 100% scale). */
 .grid4 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 20px;
+  column-gap: 1.25rem;
 }
 
 /* Italic serif accent words in headlines. */
@@ -193,14 +250,14 @@ section[id] {
 
 .skip {
   position: fixed;
-  top: 8px;
-  left: 8px;
+  top: 0.5rem;
+  left: 0.5rem;
   z-index: 100;
-  padding: 10px 16px;
+  padding: 0.625rem 1rem;
   border-radius: 999px;
   background: var(--inverse-bg);
   color: var(--inverse-text);
-  font-size: 14px;
+  font-size: 0.875rem;
   transform: translateY(-200%);
 }
 
@@ -213,9 +270,9 @@ section[id] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 0.625rem;
   border-radius: 999px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
   white-space: nowrap;
   transition: transform 0.25s var(--ease), background-color 0.25s ease,
@@ -226,40 +283,9 @@ section[id] {
   transform: scale(0.97);
 }
 
-.btn .arrow {
-  display: inline-block;
-  transition: transform 0.25s var(--ease);
-}
-
-.btn:hover .arrow {
-  transform: translateX(3px);
-}
-
-.btnPrimary {
-  padding: 16px 24px;
-  font-size: 15px;
-  background: var(--accent);
-  color: var(--inverse-text);
-}
-
-.btnPrimary:hover {
-  filter: brightness(1.08);
-}
-
-.btnSecondary {
-  padding: 15px 24px;
-  font-size: 15px;
-  border: 1px solid var(--text);
-}
-
-.btnSecondary:hover {
-  background: var(--text);
-  color: var(--canvas);
-}
-
 .btnSmall {
-  padding: 10px 18px;
-  font-size: 14px;
+  padding: 0.625rem 1.125rem;
+  font-size: 0.875rem;
   background: var(--inverse-bg);
   color: var(--inverse-text);
 }
@@ -271,10 +297,10 @@ section[id] {
 /* -------------------------------------------------------------------- chips -- */
 .chip {
   display: inline-flex;
-  padding: 8px 14px;
+  padding: 0.5rem 0.875rem;
   border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: normal;
   white-space: nowrap;
   transition: border-color 0.2s ease, background-color 0.2s ease;
@@ -286,7 +312,7 @@ section[id] {
 
 @media (max-width: 699px) {
   .chip {
-    padding: 7px 12px;
-    font-size: 13px;
+    padding: 0.4375rem 0.75rem;
+    font-size: 0.8125rem;
   }
 }

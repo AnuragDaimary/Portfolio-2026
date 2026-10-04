@@ -1,14 +1,14 @@
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
   padding-block: var(--section-y);
 }
 
 .head {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .labelShort { display: inline; }
@@ -27,53 +27,52 @@
 .columns {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .role {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+  gap: 0.375rem;
+  padding-top: 0.875rem;
 }
 
 .role + .role {
-  margin-top: 24px;
+  margin-top: 1.5rem;
 }
 
 .dates {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--text-muted);
 }
 
 .roleText {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375rem;
 }
 
 .roleTitle {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .roleBody {
   display: none;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--text-muted);
 }
 
 .skillsLabel {
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
 }
 
 .skillGroups {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem;
 }
 
 /* Mobile flattens the four groups into a single chip cloud. */
@@ -89,12 +88,12 @@
 .skillGroups {
   display: flex;
   flex-flow: row wrap;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 @media (min-width: 700px) {
   .inner {
-    gap: 56px;
+    gap: 3.5rem;
   }
 
   .labelShort { display: none; }
@@ -107,20 +106,20 @@
     overflow: visible;
     clip-path: none;
     white-space: normal;
-    font-size: clamp(36px, 2.8vw + 16px, 56px);
-    font-weight: 500;
+    font-size: clamp(2.25rem, 2.8vw + 1rem, 3.5rem);
+    font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .columns {
-    gap: 48px 20px;
+    gap: 3rem 1.25rem;
   }
 
   .role {
     flex-direction: row;
-    gap: 20px;
-    padding-block: 24px;
+    gap: 1.25rem;
+    padding-block: 1.5rem;
   }
 
   .role + .role {
@@ -129,13 +128,13 @@
 
   .dates {
     flex: none;
-    width: clamp(110px, 21%, 150px);
-    font-size: 12px;
+    width: clamp(6.875rem, 21%, 9.375rem);
+    font-size: 0.75rem;
   }
 
   .roleTitle {
-    font-size: 20px;
-    letter-spacing: -0.01em;
+    font-size: 1.25rem;
+    letter-spacing: 0;
   }
 
   .roleBody {
@@ -149,13 +148,13 @@
   .skillGroups {
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 32px;
+    gap: 2rem;
   }
 
   .group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem;
   }
 
   .groupLabel {
@@ -166,7 +165,7 @@
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
   }
 }
 

@@ -1,12 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Instrument_Serif } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { Cursor } from "@/components/Cursor";
+import { Header } from "@/components/Header";
+import { Loader } from "@/components/Loader";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { site } from "@/content/site";
 
 import "./globals.css";
 
-const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 const serif = Instrument_Serif({
   subsets: ["latin"],
@@ -30,31 +33,40 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f3ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0e0d" },
-  ],
+  themeColor: "#f4f3ef",
 };
 
-// Runs before first paint so the saved / system theme is applied with no flash.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})()`;
+// Runs before first paint: applies the saved theme (default: light) with no flash, and
+// stops the browser restoring the previous scroll position (a reload always starts at the top,
+// and drops any #hash), and sets html.rules (hairline animation) / html.loading + html.intro (loader) unless reduced motion.
+const themeScript = `(function(){try{history.scrollRestoration="manual";var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"&&location.hash)history.replaceState(null,"",location.pathname+location.search)}catch(e){}try{var t=localStorage.getItem("theme");if(t!=="dark")t="light";document.documentElement.dataset.theme=t}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches){var h=document.documentElement;h.classList.add("rules","loading","intro");setTimeout(function(){if(!h.dataset.motion)h.classList.remove("rules","loading","intro")},8000)}})()`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // suppressHydrationWarning: the script above sets data-theme before React hydrates.
     <html
       lang="en"
-      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
+      className={`${mono.variable} ${serif.variable}`}
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* suppressHydrationWarning: browser extensions often inject their own <script> into
+            <head> before hydration, which would otherwise trigger a (harmless) mismatch error. */}
+        <script suppressHydrationWarning dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body id="top">
+        <Loader />
+        <Cursor />
         <a className="skip" href="#main">
           Skip to content
         </a>
-        {children}
+        {/* Header is fixed and sits outside the smoother; the spacer in the
+            scrolled content reserves its height. */}
+        <Header />
+        <SmoothScroll>
+          <div className="header-spacer" aria-hidden="true" />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

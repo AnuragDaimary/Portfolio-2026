@@ -1,21 +1,21 @@
 .titleInner {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding-block: 48px 40px;
+  gap: 1.75rem;
+  padding-block: 3rem 2.5rem;
 }
 
 .h1 {
-  font-size: clamp(48px, 7.2vw + 16px, 120px);
-  font-weight: 500;
+  font-size: clamp(3rem, 7.2vw + 1rem, 7.5rem);
+  font-weight: 400;
   line-height: 0.95;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 
 .summary {
-  max-width: 790px;
-  font-size: clamp(18px, 0.8vw + 14px, 24px);
+  max-width: 49.375rem;
+  font-size: clamp(1.125rem, 0.8vw + 0.875rem, 1.5rem);
   line-height: 1.4;
   color: var(--text-muted);
 }
@@ -23,27 +23,25 @@
 .facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 20px;
+  gap: 1.5rem 1.25rem;
   margin: 0;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
 }
 
 .fact {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .fact dd {
   margin: 0;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
 .soon {
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
   color: var(--accent);
 }
 
@@ -51,73 +49,73 @@
 .blockInner {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding-top: clamp(64px, 6vw + 40px, 120px);
+  gap: 2rem;
+  padding-top: clamp(4rem, 6vw + 2.5rem, 7.5rem);
 }
 
 .blockHead {
-  row-gap: 16px;
+  row-gap: 1rem;
 }
 
 .labelCol {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .num {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--accent);
 }
 
 .blockTitle {
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .body {
   grid-column: 1 / -1;
-  max-width: 790px;
-  font-size: 18px;
+  max-width: 49.375rem;
+  font-size: 1.125rem;
   line-height: 1.5;
 }
 
 .mediaRow {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 20px;
+  gap: 1.25rem;
 }
 
 /* --------------------------------------------------------------- outcome -- */
 .outcomeInner {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem;
   padding-block: var(--section-y);
 }
 
 .stats {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 32px 20px;
+  gap: 2rem 1.25rem;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 24px;
-  border-top: 1px solid var(--text);
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  --rule-color: var(--text);
 }
 
 .statValue {
-  font-size: clamp(56px, 4.4vw + 36px, 80px);
-  font-weight: 500;
+  font-size: clamp(3.5rem, 4.4vw + 2.25rem, 5rem);
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .statLabel {
@@ -126,7 +124,7 @@
 
 .note {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--accent);
 }
 
@@ -141,8 +139,8 @@
 .nextInner {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding-block: 56px;
+  gap: 1rem;
+  padding-block: 3.5rem;
 }
 
 .nextLabel {
@@ -153,11 +151,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  font-size: clamp(36px, 5.5vw + 14px, 96px);
-  font-weight: 500;
+  gap: 1.5rem;
+  font-size: clamp(2.25rem, 5.5vw + 0.875rem, 6rem);
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .nextArrow {
@@ -167,13 +165,13 @@
 }
 
 .next:hover .nextArrow {
-  transform: translateX(12px);
+  transform: translateX(0.75rem);
 }
 
 @media (min-width: 700px) {
   .titleInner {
-    gap: 40px;
-    padding-block: clamp(48px, 9vw - 12px, 96px) 64px;
+    gap: 2.5rem;
+    padding-block: clamp(3rem, 9vw - 0.75rem, 6rem) 4rem;
   }
 
   .facts {
@@ -181,7 +179,7 @@
   }
 
   .blockInner {
-    gap: 48px;
+    gap: 3rem;
   }
 
   .labelCol {
@@ -189,12 +187,12 @@
   }
 
   .blockTitle {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .body {
     grid-column: 2 / -1;
-    font-size: clamp(18px, 0.5vw + 15px, 22px);
+    font-size: clamp(1.125rem, 0.5vw + 0.9375rem, 1.375rem);
   }
 
   /* --cols is set per section from the number of media items. */
@@ -207,10 +205,10 @@
   }
 
   .note {
-    font-size: 11px;
+    font-size: 0.6875rem;
   }
 
   .nextInner {
-    padding-block: 80px;
+    padding-block: 5rem;
   }
 }

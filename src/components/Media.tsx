@@ -14,7 +14,7 @@ interface MediaProps {
  * <Image> in here and keep the caption as alt text.
  */
 export function Media({ caption, height, className }: MediaProps) {
-  const style = { "--h": `${height}px` } as CSSProperties;
+  const style = { "--h": `${height / 16}rem` } as CSSProperties;
   return (
     <div className={`${styles.media} ${className ?? ""}`} style={style} role="img" aria-label={caption}>
       <span className={styles.caption}>[ {caption} ]</span>

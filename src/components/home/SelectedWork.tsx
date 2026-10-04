@@ -8,9 +8,9 @@ import styles from "./SelectedWork.module.css";
 
 export function SelectedWork() {
   return (
-    <section id="work" className={styles.work} aria-labelledby="work-title">
+    <section id="work" className={styles.work} data-rule="top" aria-labelledby="work-title">
       <div className={`container ${styles.inner}`}>
-        <div className={styles.head}>
+        <div className={styles.head} data-reveal>
           <div className={styles.titleBlock}>
             <p className="eyebrow">{work.label}</p>
             <h2 id="work-title" className={styles.title}>
@@ -26,6 +26,7 @@ export function SelectedWork() {
               key={p.slug}
               href={`/work/${p.slug}`}
               className={`${styles.card} ${p.span === 1 ? styles.wide : ""}`}
+              data-reveal
             >
               <div className={styles.frame}>
                 <Media caption={p.card.caption} height={p.card.height} className={styles.media} />
@@ -44,11 +45,13 @@ export function SelectedWork() {
           ))}
         </div>
 
-        <div className={styles.more}>
-          <p className={`eyebrow ${styles.moreLabel}`}>More work</p>
+        <div className={styles.more} data-rule="bottom">
+          <p className={`eyebrow ${styles.moreLabel}`} data-reveal>
+            More work
+          </p>
           <ul>
             {work.more.map((row) => (
-              <li key={row.title} className={styles.row}>
+              <li key={row.title} className={styles.row} data-rule="top" data-reveal>
                 <h3 className={styles.rowTitle}>{row.title}</h3>
                 <p className={styles.rowBody}>{row.body}</p>
                 <span className={styles.rowCount}>{row.count}</span>

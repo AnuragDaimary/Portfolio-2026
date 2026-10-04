@@ -1,11 +1,11 @@
 .work {
-  border-top: 1px solid var(--border);
+  position: relative;
 }
 
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 2.25rem;
   padding-block: var(--section-y);
 }
 
@@ -13,13 +13,13 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 40px;
+  gap: 2.5rem;
 }
 
 .titleBlock {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 /* Mobile frame shows only the eyebrow; keep the heading for screen readers. */
@@ -39,19 +39,19 @@
 .cards {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 36px 20px;
+  gap: 2.25rem 1.25rem;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0.875rem;
   min-width: 0;
 }
 
 .frame {
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 .media {
@@ -65,28 +65,28 @@
 .meta {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .metaText {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.25rem;
   min-width: 0;
 }
 
 .cardTitle {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .go {
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 0.5rem;
   color: var(--accent);
   opacity: 0;
-  transform: translate(-4px, 4px);
+  transform: translate(-0.25rem, 0.25rem);
   transition: opacity 0.25s ease, transform 0.3s var(--ease);
 }
 
@@ -97,7 +97,7 @@
 }
 
 .tagline {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.4;
   color: var(--text-muted);
 }
@@ -110,7 +110,7 @@
 
 /* ------------------------------------------------------------- more work -- */
 .more {
-  border-bottom: 1px solid var(--border);
+  position: relative;
 }
 
 .moreLabel {
@@ -121,16 +121,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding-block: 18px;
-  border-top: 1px solid var(--border);
+  gap: 1.25rem;
+  padding-block: 1.125rem;
   transition: padding-left 0.35s var(--ease);
 }
 
 .rowTitle {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .rowBody,
@@ -139,23 +138,23 @@
 }
 
 .rowArrow {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 400;
   transition: transform 0.3s var(--ease), color 0.2s ease;
 }
 
 .row:hover .rowArrow {
-  transform: translate(2px, -2px);
+  transform: translate(0.125rem, -0.125rem);
   color: var(--accent);
 }
 
 @media (min-width: 700px) {
   .inner {
-    gap: 56px;
+    gap: 3.5rem;
   }
 
   .titleBlock .eyebrow {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .title {
@@ -165,24 +164,24 @@
     overflow: visible;
     clip-path: none;
     white-space: normal;
-    font-size: clamp(36px, 2.8vw + 16px, 56px);
-    font-weight: 500;
+    font-size: clamp(2.25rem, 2.8vw + 1rem, 3.5rem);
+    font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .blurb {
     display: block;
     flex: none;
-    width: min(380px, 40%);
-    font-size: 15px;
+    width: min(23.75rem, 40%);
+    font-size: 0.9375rem;
     line-height: 1.5;
     color: var(--text-muted);
   }
 
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 56px 20px;
+    gap: 3.5rem 1.25rem;
   }
 
   .wide {
@@ -190,55 +189,55 @@
   }
 
   .card {
-    gap: 20px;
+    gap: 1.25rem;
   }
 
   .cardTitle {
-    font-size: 24px;
-    letter-spacing: -0.015em;
+    font-size: 1.5rem;
+    letter-spacing: 0;
   }
 
   .tagline {
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
 
   .moreLabel {
     display: block;
-    padding-bottom: 16px;
+    padding-bottom: 1rem;
   }
 
   .row {
-    gap: 20px;
-    padding-block: 28px;
+    gap: 1.25rem;
+    padding-block: 1.75rem;
   }
 
   .rowTitle {
     flex: none;
-    width: clamp(220px, 33%, 400px);
-    font-size: clamp(22px, 1.4vw + 12px, 32px);
-    letter-spacing: -0.02em;
+    width: clamp(13.75rem, 33%, 25rem);
+    font-size: clamp(1.375rem, 1.4vw + 0.75rem, 2rem);
+    letter-spacing: 0;
   }
 
   .rowBody {
     display: block;
     flex: 1;
     min-width: 0;
-    font-size: 15px;
+    font-size: 0.9375rem;
     color: var(--text-muted);
   }
 
   .rowCount {
     display: block;
     font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 12px;
+    font-size: 0.75rem;
     color: var(--text-muted);
   }
 
   .rowArrow {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .row:hover {
-    padding-left: 12px;
+    padding-left: 0.75rem;
   }
 }

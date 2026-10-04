@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer id="contact" className={styles.footer}>
       <div className={`container ${styles.inner}`}>
-        <div className={styles.contact}>
+        <div className={styles.contact} data-reveal>
           <p className={`eyebrow ${styles.muted}`}>{contact.label}</p>
           <h2 className={styles.headline}>
             <span className={styles.line}>Let’s build the </span>
@@ -21,7 +21,7 @@ export function Footer() {
           </a>
         </div>
 
-        <div className={styles.bar}>
+        <div className={styles.bar} data-rule="top" data-reveal>
           <p className={styles.muted}>
             © 2026 {site.name}
             <span className={styles.wide}> — {contact.location}</span>

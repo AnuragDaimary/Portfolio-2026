@@ -4,37 +4,19 @@
 export const hero = {
   metaLeft: "Product · Systems · Visual Design",
   metaRight: "Toronto, CA — 43.65°N",
-  lead: "Designer at Cheil working on Samsung Canada — from flagship launch key visuals to bilingual CRM, coded Riverpages, and the AI tooling that makes production faster.",
-};
-
-export const about = {
-  label: "01 — How I work",
-  statement:
-    "I sit between brand, product and production. I build the kit of parts first — grids, tokens, templates, pipelines — so every campaign after the first one gets faster, more consistent, and easier to hand off.",
-  statementShort:
-    "I build the kit of parts first — grids, tokens, templates, pipelines — so every campaign after the first gets faster.",
-  principles: [
-    {
-      title: "Systems before screens",
-      body: "Tokens, grids and component logic that scale across 20+ assets per launch.",
-    },
-    {
-      title: "Craft at production speed",
-      body: "Pixel-level KVs, retouching and grading — without losing the deadline.",
-    },
-    {
-      title: "Automate the repetitive",
-      body: "Figma MCP + AI pipelines that turn copydecks into built emails.",
-    },
-    {
-      title: "Bilingual by default",
-      body: "EN / FR-CA layouts designed for both lengths from day one.",
-    },
-  ],
+  greeting: "Hi, I’m Anurag.",
+  // Broken after the comma, as two visual lines.
+  tagline: ["I design the work,", "and the system behind it."],
+  // The sub-line is split around the linked word so only "Cheil" is bold + clickable.
+  subBefore: "Designer at ",
+  employer: "Cheil",
+  // TODO: placeholder — Cheil's global site. Point this at the right Cheil page.
+  employerHref: "https://www.cheil.com",
+  subAfter: ", working on Samsung campaigns, emails, and web pages.",
 };
 
 export const work = {
-  label: "02 — Selected work",
+  label: "01 — Selected work",
   title: "Flagship case studies",
   blurb:
     "Launch work for Samsung Canada and partners. Each case study shows the system, the craft, and the outcome.",
@@ -55,6 +37,16 @@ export const work = {
       count: "—",
     },
     { title: "Archive", body: "Pre-Cheil explorations", count: "—" },
+  ],
+};
+
+export const about = {
+  label: "02 — About",
+  paragraphs: [
+    "I’m a designer at Cheil, working on Samsung Canada. I’ve designed for product launches and seasonal campaigns across email, web pages, carrier partner pages, and brand guidelines.",
+    "What I’m best at is systems. I don’t just design the work. I improve how it gets made, with templates, components, and workflows that help the team produce more with fewer mistakes.",
+    "I try new tools early and keep what’s actually useful. Lately that’s meant connecting AI to my workflow to automate repetitive production work.",
+    "I also code enough to build what I design, and I can jump in on video, motion, and sound when a project needs it.",
   ],
 };
 

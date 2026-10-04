@@ -1,0 +1,38 @@
+/* Positioned by transform from Cursor.tsx. mix-blend-mode sits on this outer element
+   (not the dot) so it blends with the page behind it rather than inside its own layer. */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300; /* above the loader (200) */
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: difference;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+.cursor[data-visible] {
+  opacity: 1;
+}
+
+/* White + difference = black on light surfaces, white on dark ones. */
+.dot {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: -0.625rem 0 0 -0.625rem; /* centre on the pointer */
+  border-radius: 50%;
+  background: #fff;
+  opacity: 1;
+  transform: scale(1);
+  /* release: ease back out to the resting state */
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+}
+
+/* press: smaller and lighter, quickly */
+.cursor[data-pressed] .dot {
+  opacity: 0.5;
+  transform: scale(0.55);
+  transition: transform 0.14s ease-out, opacity 0.14s ease-out;
+}

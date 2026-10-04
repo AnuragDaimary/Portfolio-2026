@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CaseStudy } from "@/components/case/CaseStudy";
-import { Header } from "@/components/Header";
 import { getNextProject, getProject, projects } from "@/content/work";
 
 interface PageProps {
@@ -33,7 +32,6 @@ export default async function WorkPage({ params }: PageProps) {
 
   return (
     <>
-      <Header variant="case" />
       <main id="main">
         <CaseStudy project={project} next={getNextProject(slug)} />
       </main>

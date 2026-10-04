@@ -1,20 +1,20 @@
 .footer {
   background: var(--inverse-bg);
   color: var(--inverse-text);
-  padding-block: 72px 32px;
+  padding-block: 4.5rem 2rem;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 2.5rem;
 }
 
 .contact {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem;
 }
 
 .muted {
@@ -22,10 +22,10 @@
 }
 
 .headline {
-  font-size: clamp(44px, 6.5vw + 19px, 112px);
-  font-weight: 500;
+  font-size: clamp(2.75rem, 6.5vw + 1.1875rem, 7rem);
+  font-weight: 400;
   line-height: 0.95;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
 }
 
 .headline .serif {
@@ -34,8 +34,8 @@
 
 .email {
   align-self: flex-start;
-  font-size: 17px;
-  letter-spacing: -0.01em;
+  font-size: 1.0625rem;
+  letter-spacing: 0;
   overflow-wrap: anywhere;
   border-bottom: 1px solid transparent;
   transition: border-color 0.25s ease;
@@ -48,18 +48,18 @@
 .bar {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
-  padding-top: 20px;
-  border-top: 1px solid var(--inverse-muted);
+  gap: 1rem;
+  padding-top: 1.25rem;
+  --rule-color: var(--inverse-muted);
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 0.6875rem;
 }
 
 .socials {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 8px 16px;
+  gap: 0.5rem 1rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -78,25 +78,25 @@
 
 @media (min-width: 700px) {
   .footer {
-    padding-block: clamp(72px, 12vw - 28px, 140px) 48px;
+    padding-block: clamp(4.5rem, 12vw - 1.75rem, 8.75rem) 3rem;
   }
 
   .inner {
-    gap: clamp(40px, 11vw - 36px, 120px);
+    gap: clamp(2.5rem, 11vw - 2.25rem, 7.5rem);
   }
 
   .email {
-    font-size: 28px;
-    letter-spacing: -0.01em;
+    font-size: 1.75rem;
+    letter-spacing: 0;
   }
 
   .bar {
-    padding-top: 24px;
-    font-size: 12px;
+    padding-top: 1.5rem;
+    font-size: 0.75rem;
   }
 
   .socials {
-    gap: 8px 32px;
+    gap: 0.5rem 2rem;
   }
 
   .narrow {
