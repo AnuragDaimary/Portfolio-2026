@@ -3,6 +3,7 @@ import Link from "next/link";
 import { work } from "@/content/home";
 import { projects } from "@/content/work";
 
+import { ArrowUpRight } from "../ArrowUpRight";
 import { Media } from "../Media";
 import styles from "./SelectedWork.module.css";
 
@@ -35,7 +36,9 @@ export function SelectedWork() {
                 <div className={styles.metaText}>
                   <h3 className={styles.cardTitle}>
                     {p.title}
-                    <span className={styles.go} aria-hidden="true">↗</span>
+                    <span className={styles.go} aria-hidden="true">
+                      <ArrowUpRight />
+                    </span>
                   </h3>
                   <p className={styles.tagline}>{p.tagline}</p>
                 </div>
@@ -55,7 +58,9 @@ export function SelectedWork() {
                 <h3 className={styles.rowTitle}>{row.title}</h3>
                 <p className={styles.rowBody}>{row.body}</p>
                 <span className={styles.rowCount}>{row.count}</span>
-                <span className={styles.rowArrow} aria-hidden="true">↗</span>
+                <span className={styles.rowArrow} aria-hidden="true">
+                  <ArrowUpRight />
+                </span>
               </li>
             ))}
           </ul>
