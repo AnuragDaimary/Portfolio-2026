@@ -1,6 +1,7 @@
 import { hero } from "@/content/home";
 
 import styles from "./Hero.module.css";
+import { TorontoTime } from "./TorontoTime";
 
 export function Hero() {
   return (
@@ -8,7 +9,10 @@ export function Hero() {
       <div className={`container ${styles.inner}`}>
         <div className={`eyebrow ${styles.meta}`}>
           <span>{hero.metaLeft}</span>
-          <span className={styles.metaRight}>{hero.metaRight}</span>
+          <span className={styles.metaRight}>
+            {hero.metaRight}
+            <TorontoTime />
+          </span>
         </div>
 
         <div className={styles.copy}>

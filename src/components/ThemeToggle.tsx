@@ -2,9 +2,9 @@
 
 import { useSyncExternalStore } from "react";
 
-import styles from "./ThemeToggle.module.css";
+import { OVERRIDE_KEY, autoTheme, nextBoundary, type Theme } from "@/lib/theme";
 
-type Theme = "light" | "dark";
+import styles from "./ThemeToggle.module.css";
 
 // The <html data-theme> attribute is the source of truth (set pre-paint by the
 // inline script in layout.tsx), so the component just observes it.
@@ -28,7 +28,10 @@ export function ThemeToggle() {
     const next: Theme = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     try {
-      localStorage.setItem("theme", next);
+      // Honour the choice until the next 07:00 / 20:00 switch, then follow the clock again.
+      // Picking what the clock would pick anyway needs no override.
+      if (next === autoTheme()) localStorage.removeItem(OVERRIDE_KEY);
+      else localStorage.setItem(OVERRIDE_KEY, JSON.stringify({ theme: next, until: nextBoundary() }));
     } catch {
       /* storage unavailable (private mode) — theme still applies for this visit */
     }

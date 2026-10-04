@@ -1,5 +1,9 @@
-/* No vertical padding of its own: the sections on either side already carry
-   --section-y, so the gap above and below matches the rest of the page. */
+/* Owns the gap above it (the section before has no bottom padding) so the nav link lands
+   with room above the label; the gap below comes from Experience's top padding. */
+.about {
+  padding-top: var(--section-y);
+}
+
 .row {
   row-gap: 1.25rem;
 }

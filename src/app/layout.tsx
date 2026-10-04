@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Loader } from "@/components/Loader";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { site } from "@/content/site";
+import { themeBootstrap } from "@/lib/theme";
 
 import "./globals.css";
 
@@ -36,10 +37,11 @@ export const viewport: Viewport = {
   themeColor: "#f4f3ef",
 };
 
-// Runs before first paint: applies the saved theme (default: light) with no flash, and
+// Runs before first paint: applies the theme with no flash (light 07:00–19:59, dark otherwise,
+// by the viewer's local clock; a manual toggle lasts until the next switch time), and
 // stops the browser restoring the previous scroll position (a reload always starts at the top,
 // and drops any #hash), and sets html.rules (hairline animation) / html.loading + html.intro (loader) unless reduced motion.
-const themeScript = `(function(){try{history.scrollRestoration="manual";var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"&&location.hash)history.replaceState(null,"",location.pathname+location.search)}catch(e){}try{var t=localStorage.getItem("theme");if(t!=="dark")t="light";document.documentElement.dataset.theme=t}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches){var h=document.documentElement;h.classList.add("rules","loading","intro");setTimeout(function(){if(!h.dataset.motion)h.classList.remove("rules","loading","intro")},8000)}})()`;
+const themeScript = `(function(){try{history.scrollRestoration="manual";var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"&&location.hash)history.replaceState(null,"",location.pathname+location.search)}catch(e){}${themeBootstrap}if(!matchMedia("(prefers-reduced-motion: reduce)").matches){var h=document.documentElement;h.classList.add("rules","loading","intro");setTimeout(function(){if(!h.dataset.motion)h.classList.remove("rules","loading","intro")},8000)}})()`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

@@ -6,7 +6,9 @@
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
-  padding-block: var(--section-y);
+  /* No bottom padding: the gap below this section belongs to About (its padding-top), so
+     the About nav link lands with space above it. Total spacing is unchanged. */
+  padding-block: var(--section-y) 0;
 }
 
 .head {

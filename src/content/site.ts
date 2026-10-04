@@ -2,7 +2,7 @@
 
 export const site = {
   name: "Anurag Daimary",
-  email: "anurag.daimary1@gmail.com",
+  email: "anuragdaimary.work@gmail.com",
   description:
     "Designer at Cheil working on Samsung Canada — launch key visuals, bilingual CRM, coded Riverpages and AI production tooling.",
   resumeHref: "/resume.pdf", // TODO: drop the PDF into /public/resume.pdf
@@ -13,6 +13,7 @@ export const site = {
   ],
   nav: [
     { label: "Work", href: "/#work" },
+    { label: "About", href: "/#about" },
     { label: "Experience", href: "/#experience" },
     { label: "Contact", href: "/#contact" },
   ],

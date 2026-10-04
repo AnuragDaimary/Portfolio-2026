@@ -3,7 +3,7 @@
 
 export const hero = {
   metaLeft: "Product · Systems · Visual Design",
-  metaRight: "Toronto, CA — 43.65°N",
+  metaRight: "Toronto, CA",
   greeting: "Hi, I’m Anurag.",
   // Broken after the comma, as two visual lines.
   tagline: ["I design the work,", "and the system behind it."],

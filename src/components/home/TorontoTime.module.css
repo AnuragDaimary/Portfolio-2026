@@ -1,0 +1,10 @@
+/* The separator and time are hidden (but still take up their width) until the real time has
+   been read, so nothing dangles or shifts. */
+.clock {
+  visibility: hidden;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock[data-ready] {
+  visibility: visible;
+}
