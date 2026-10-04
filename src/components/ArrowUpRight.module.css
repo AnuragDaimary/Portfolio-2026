@@ -1,0 +1,8 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: -0.125em; /* sits on the text baseline like a letter would */
+  overflow: visible;
+}

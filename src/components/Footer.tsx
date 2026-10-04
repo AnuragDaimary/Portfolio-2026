@@ -1,6 +1,7 @@
 import { contact } from "@/content/home";
 import { site } from "@/content/site";
 
+import { ArrowUpRight } from "./ArrowUpRight";
 import styles from "./Footer.module.css";
 
 /** Contact + footer block (inverse surface). Shared by home and case pages. */
@@ -17,7 +18,7 @@ export function Footer() {
             </span>
           </h2>
           <a className={styles.email} href={`mailto:${site.email}`}>
-            {site.email} <span aria-hidden="true">↗</span>
+            {site.email} <ArrowUpRight />
           </a>
         </div>
 
