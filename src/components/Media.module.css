@@ -33,3 +33,26 @@
     height: var(--h);
   }
 }
+
+/* Real image: the frame's shape comes from the image (aspect-ratio set inline), so it is never
+   cropped and never jumps while loading. The grey is visible only for the instant before the
+   blurred preview paints. */
+.photo {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background: var(--surface);
+}
+
+.img {
+  object-fit: cover; /* matches the frame's ratio exactly, so this crops nothing */
+}
+
+/* Placeholder with a fixed shape (see the `aspect` prop). Two classes so it wins over the
+   breakpoint heights above. */
+.media.ratio {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--aspect);
+}

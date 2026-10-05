@@ -1,0 +1,94 @@
+.root {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background: var(--surface);
+  isolation: isolate;
+}
+
+/* Cross-fade: every slide is stacked; only the active one is opaque. */
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide[data-active] {
+  opacity: 1;
+}
+
+.img {
+  object-fit: cover; /* the frame matches the image shape, so this crops nothing */
+}
+
+/* Indicator: a frosted pill so it stays readable over light and dark visuals alike. */
+.indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 0.75rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(17, 17, 16, 0.34);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transform: translateX(-50%);
+}
+
+.dot {
+  position: relative;
+  width: 0.375rem;
+  height: 0.375rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The current visual stretches into a line (the track the fill runs along). */
+.dot[data-active] {
+  width: 1.75rem;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Reduced motion: no fill, so show the current one as a solid line instead. */
+.indicator[data-static] .dot[data-active] {
+  background: #fff;
+}
+
+/* The fill is the timer: it grows across the line over --interval, then the slide advances.
+   Paused unless the card is on screen and ready; paused again while hovered. */
+.fill {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: fill var(--interval, 5000ms) linear forwards;
+  animation-play-state: paused;
+}
+
+.root[data-playing] .fill {
+  animation-play-state: running;
+}
+
+.root:hover .fill {
+  animation-play-state: paused;
+}
+
+@keyframes fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 700px) {
+  .indicator {
+    bottom: 1rem;
+  }
+}
