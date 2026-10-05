@@ -12,7 +12,7 @@ export const hero = {
   employer: "Cheil",
   // TODO: placeholder — Cheil's global site. Point this at the right Cheil page.
   employerHref: "https://www.cheil.com",
-  subAfter: ", working on Samsung campaigns, emails, and web pages.",
+  subAfter: ", working on Samsung projects.",
 };
 
 export const work = {
@@ -54,28 +54,35 @@ export const experience = {
   label: "03 — Experience & skills",
   labelShort: "03 — Experience",
   title: "Where I’ve worked",
-  // TODO: the design uses 20XX placeholders for dates and the last two roles.
+  // Each row: dates, then the company (bold line), then the job title (grey line).
+  // Newest first. `title` = company, `body` = role.
   roles: [
-    {
-      dates: "20XX — Now",
-      title: "Creative / Designer — Cheil Canada",
-      body: "Samsung Canada launches, CRM, Riverpages, playbooks; UX & QA on Cheil AI Studio.",
-    },
-    {
-      dates: "20XX — 20XX",
-      title: "Role title — Previous studio",
-      body: "One line on scope and impact.",
-    },
-    {
-      dates: "20XX — 20XX",
-      title: "Role title — Freelance",
-      body: "UI/UX, video production & colour grading (S-Log3).",
-    },
+    { dates: "Jan 2026 – Now", title: "Cheil Canada", body: "Designer" },
+    { dates: "Dec 2023 – Jul 2025", title: "ICFF", body: "User Experience Designer" },
+    { dates: "May 2023 – Aug 2024", title: "Infrar3D", body: "UX Designer" },
+    { dates: "Sep 2023 – Nov 2023", title: "Inspiration Digital", body: "UI Designer – Contract" },
+    { dates: "Sep 2018 – Dec 2018", title: "Certivity", body: "Graphic Designer – Freelance" },
+  ],
+  education: [
+    { dates: "2023 – 2024", title: "George Brown College", body: "Design Management – Post Graduate" },
+    { dates: "2022 – 2023", title: "Humber College", body: "User Experience Design – Post Graduate" },
+    { dates: "2017 – 2021", title: "Indian Institute of Information Technology", body: "Bachelor of Design – Visual Design" },
   ],
   skills: [
     {
       group: "Product & UX",
-      items: ["User flows", "Wireframing", "Prototyping", "QA & usability"],
+      items: [
+        "Quantitative research",
+        "Qualitative research",
+        "User flows",
+        "Wireframing",
+        "Prototyping",
+        "QA & usability",
+      ],
+    },
+    {
+      group: "Interface & Interaction",
+      items: ["Interface design", "Interaction design", "Micro-interactions", "Motion design"],
     },
     {
       group: "Systems",
@@ -91,8 +98,31 @@ export const experience = {
       items: ["Key visuals", "Compositing", "Colour grading", "Typography"],
     },
     {
+      group: "Accessibility",
+      items: ["WCAG 2", "AODA"],
+    },
+    {
+      group: "AI",
+      items: [
+        "Claude",
+        "ChatGPT",
+        "Nano Banana",
+        "AI inside design workflows",
+      ],
+    },
+    {
       group: "Tools",
-      items: ["Figma", "Adobe CC", "HTML/CSS", "TouchDesigner", "Claude"],
+      items: [
+        "Figma",
+        "Sketch",
+        "Photoshop",
+        "Illustrator",
+        "InDesign",
+        "After Effects",
+        "Premiere Pro",
+        "HTML/CSS",
+        "TouchDesigner",
+      ],
     },
   ],
 };

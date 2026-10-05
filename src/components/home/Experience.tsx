@@ -17,17 +17,36 @@ export function Experience() {
         </div>
 
         <div className={styles.columns}>
-          <ol className={styles.roles}>
-            {experience.roles.map((r) => (
-              <li key={r.title} className={styles.role} data-rule="top" data-reveal>
-                <p className={styles.dates}>{r.dates}</p>
-                <div className={styles.roleText}>
-                  <h3 className={styles.roleTitle}>{r.title}</h3>
-                  <p className={styles.roleBody}>{r.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <div className={styles.roles}>
+            <ol className={styles.list}>
+              {experience.roles.map((r) => (
+                <li key={r.title} className={styles.role} data-rule="top" data-reveal>
+                  <p className={styles.dates}>{r.dates}</p>
+                  <div className={styles.roleText}>
+                    <h3 className={styles.roleTitle}>{r.title}</h3>
+                    <p className={styles.roleBody}>{r.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <div className={styles.education}>
+              <p className={`eyebrow ${styles.eduLabel}`} data-reveal>
+                Education
+              </p>
+              <ol className={styles.list}>
+                {experience.education.map((r) => (
+                  <li key={r.title} className={styles.role} data-rule="top" data-reveal>
+                    <p className={styles.dates}>{r.dates}</p>
+                    <div className={styles.roleText}>
+                      <h3 className={styles.roleTitle}>{r.title}</h3>
+                      <p className={styles.roleBody}>{r.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
 
           <div className={styles.skills} data-reveal>
             <p className={`eyebrow ${styles.skillsLabel}`}>Skills</p>

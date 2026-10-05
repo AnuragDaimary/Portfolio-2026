@@ -21,3 +21,7 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 coverage/
+
+# Full-size originals of project images (multi-MB). Only the resized copies in src/assets/work
+# belong in the repo.
+/PortfolioAssets/

@@ -30,6 +30,14 @@
   gap: 1.5rem;
 }
 
+.education {
+  margin-top: 1.5rem;
+}
+
+.eduLabel {
+  margin-bottom: 0.875rem;
+}
+
 .role {
   display: flex;
   flex-direction: column;
@@ -58,8 +66,8 @@
   font-weight: 400;
 }
 
+/* Holds the job title, so it shows at every screen size. */
 .roleBody {
-  display: none;
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--text-muted);
@@ -119,7 +127,7 @@
   .role {
     flex-direction: row;
     gap: 1.25rem;
-    padding-block: 1.5rem;
+    padding-block: 1rem;
   }
 
   .role + .role {
@@ -145,10 +153,17 @@
     display: none;
   }
 
+  .skills {
+    display: flex;
+    flex-direction: column;
+  }
+
   .skillGroups {
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 2rem;
+    gap: 1.75rem;
+    flex: 1;
+    justify-content: space-between; /* fill the height set by the roles column */
   }
 
   .group {
